@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredients-Slider</title>
+
+    <style>
+        .ingredients-slider {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width:80%;
+            margin: auto;
+        }
+
+        .ingredients-slider__container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+
+        .ingredients-slider__image {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .ingredients-slider__item {
+            width: calc(100%/2 - 1px);
+            flex: 0 0 auto;
+            position: relative;
+            text-align: center;
+            color: #fff;
+            padding: 8px;
+        }
+
+        .ingredients-slider__item img {
+            width: 100%;
+            border-radius: 3%;
+        }
+
+        .ingredients-slider__arrow {
+            position: absolute;
+            top: 40%;
+            margin: 10px;
+            padding: 13px 18px;
+            background-color: #009bce78; /* Translucent orange */
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        .ingredients-slider__left-arrow {
+            left: 0px;
+        }
+
+        .ingredients-slider__right-arrow {
+            right: 0px;
+        }
+
+        .ingredients-content {
+            text-align: center;
+            display: none;
+        }
+
+        .ingredients-content__visible {
+            display: block;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -45%);
+            width: 80%;
+            margin: auto;
+            background-color: #D0F1EB;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .ingredients-content__close-btn {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            margin: 5px;
+        }
+
+        .ingredients-btn{
+            text-align: center;
+        }
+
+        .ingredients-btn__button {
+            all: unset;
+            top: 5px;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #009ACE;
+            background-color: #D0F1EB;
+            border-radius: 12px;
+            border: 1px solid #009ACE;
+        }
+
+        .ingredients-btn__button:hover {
+            color: #009bce71;
+            background-color: #cccccc69;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 769px) {
+            .ingredients-slider {
+                width: 90%;
+            }
+
+            .ingredients-slider__item {
+                width: 100%;
+                padding: 0;
+            }
+
+            .ingredients-slider__arrow {
+                padding: 5px;
+                font-size: 16px;
+            }
+            .ingredients-content__visible p{
+                font-size: 14px;
+                line-height: 1.5;
+                overflow-y: auto;
+                max-height: 200px;
+            }
+            
+                
+          
+        }
+    </style>
+</head>
+<body>
+    <section class="ingredients-slider">
+        <div class="ingredients-slider__container">
+            <div class="ingredients-slider__image">
+                <div class="ingredients-slider__item">
+                    <img src="https://cdn.shopify.com/s/files/1/0784/8768/3381/files/15_1f7afa49-80e4-4d9b-9394-adbd0dddc261.png?v=1711191688" alt="Image 1">
+                </div>
+                <div class="ingredients-slider__item">
+                    <img src="https://cdn.shopify.com/s/files/1/0784/8768/3381/files/10_694ebbeb-4542-400d-8cf9-4093a3fc7ef3.png?v=1711191687" alt="Image 2">
+                </div>
+                <div class="ingredients-slider__item">
+                    <img src="https://cdn.shopify.com/s/files/1/0784/8768/3381/files/14_e4805862-e186-457a-9ec3-0a941427dd99.png?v=1711191687" alt="Image 3">
+                </div>
+                <div class="ingredients-slider__item">
+                    <img src="https://cdn.shopify.com/s/files/1/0784/8768/3381/files/11_353a1556-bc60-47d9-b3f3-588b7da5fd47.png?v=1711191686" alt="Image 4">
+                </div>
+                <div class="ingredients-slider__item">
+                    <img src="https://cdn.shopify.com/s/files/1/0784/8768/3381/files/13_134d0789-b295-4132-8eaa-4957d9f387d5.png?v=1711191686" alt="Image 5">
+                </div>
+                <div class="ingredients-slider__item">
+                    <img src="https://cdn.shopify.com/s/files/1/0784/8768/3381/files/12_68ab4989-0e49-45ca-aea6-204910568ac1.png?v=1711191686" alt="Image 6">
+                </div>
+            </div>
+            <div class="ingredients-slider__left-arrow ingredients-slider__arrow">&lt;</div>
+            <div class="ingredients-slider__right-arrow ingredients-slider__arrow">&gt;</div>
+            <div class="ingredients-content" id="ingredients-content-div">
+                <p>
+                    Water, Niacinamide, Betaine, Isoamyl Laurate, Propylene Glycol, Cucumber Extract, Calendula Extract, Moringa Extract, Turmeric Extract, Licorice Extract, Willow Bark Extract, Prickly Pear Extract, Gingseng Extract, Oat Beta Glucan, Mulberry Extract, Phytosqualene, Phospholipids, Sphingolipids, Lecithin, Sodium Acrylate Copolymer, Phenoxyethanol Ethylhexylglycerin, Cetyl Ethylhexonate, Hyaluronic Acid, Bakuchiol, Vitamin E, Chlorophyll, Fragrance.
+                </p>
+                <button class="ingredients-content__close-btn" onclick="hideContent()">X</button>
+            </div>
+            <div class="ingredients-btn">
+                <button class="ingredients-btn__button" onclick="showContent()">Full Ingrdients List</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const sliderContainer = document.querySelector('.ingredients-slider__container');
+        const imageSlider = document.querySelector('.ingredients-slider__image');
+        const leftArrow = document.querySelector('.ingredients-slider__left-arrow');
+        const rightArrow = document.querySelector('.ingredients-slider__right-arrow');
+
+        let currentIndex = 0;
+        const totalImages = 5; // Update this value based on the number of images
+
+        leftArrow.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            updateSlider();
+        });
+
+        rightArrow.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalImages;
+            updateSlider();
+        });
+
+        function updateSlider() {
+            const isMobile = window.innerWidth <= 769; // Adjust the breakpoint as needed
+            const imagesToShow = isMobile ? 1 : 2;
+            const translateValue = -currentIndex * (100 / imagesToShow);
+            imageSlider.style.transform = `translateX(${translateValue}%)`;
+        }
+
+        // Update the slider when the window is resized
+        window.addEventListener('resize', updateSlider);
+
+        // Initial update
+        updateSlider();
+
+        // FOR VIEW INGREDIENTS 
+        const contentDiv = document.getElementById('ingredients-content-div');
+         // Function to show content
+         function showContent() {
+            contentDiv.classList.add('ingredients-content__visible');
+        }
+
+        // Function to hide content
+        function hideContent() {
+            contentDiv.classList.remove('ingredients-content__visible');
+        }
+    </script>
+</body>
+</html>

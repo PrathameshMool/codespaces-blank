@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students</title>
+
+    <style>
+        body {
+            background-color: #d0f1eb87;
+            font-family: Helvetica, sans-serif;
+            color: #222;
+        }
+
+        .page {
+            margin: 50px auto;
+            width: 90%;
+            background-color: #d0f1eb87;
+            border-radius: 5px;
+            padding: 50px;
+        }
+
+        .page-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn {
+            all: unset;
+            background-color: #4ba6c3;
+            color: #fff;
+            padding: 8px;
+            margin: 2px;
+            border-radius: 5px;
+        }
+
+        .student-item {
+            margin: 0 0 20px 0;
+            padding: 0 0 20px 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .student-details {
+            width: 90%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px #222;
+        }
+
+        .student-details h3 {
+            margin: 4px 0 2px 0;
+            font-weight: bold;
+            color: #4ba6c3;
+            flex: 2;
+        }
+
+        .student-details p {
+            font-size: 18px;
+            font-weight: 300;
+            color: #222;
+            flex: 3;
+        }
+
+        .student-item:last-child {
+            margin: 0;
+            padding: 0;
+            border-bottom: none;
+        }
+
+        .pagination {
+            margin: 40px 0 0 0;
+            text-align: center;
+        }
+
+        .pagination li {
+            display: inline;
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        .pagination li span {
+            border: 1px solid #eaeaea;
+            border-radius: 5px;
+            padding: 3px 8px;
+            text-decoration: none;
+            color: #4ba6c3;
+        }
+
+        .pagination li span.active,
+        .pagination li span:hover {
+            background-color: #4ba6c3;
+            color: #fff;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-bar {
+            width: 70%; /* Increase width to 80% */
+            height: 50px; /* Increase height */
+            padding: 8px;
+            margin-top: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc; /* Add border */
+            border-radius: 10px; /* Round the borders */
+            text-align: center; /* Center text */
+        }
+
+        .search-icon {
+            width: 36px;
+            height: 36px;
+            margin-left: 10px;
+            fill:  #4ba6c3; /* Change the fill color as needed */
+        }   
+
+        @media (max-width: 780px) {
+            .page {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .student-details {
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+            }
+            .student-details p {
+                font-size: 14px;
+                font-weight: 300;
+                color: #222;
+                flex: 3;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="page">
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search...">
+            <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" viewBox="0 0 50 50" width="32">
+                <path d="M 21 3 C 11.654545 3 4 10.654545 4 20 C 4 29.345455 11.654545 37 21 37 C 24.701287 37 28.127393 35.786719 30.927734 33.755859 L 44.085938 46.914062 L 46.914062 44.085938 L 33.875 31.046875 C 36.43682 28.068316 38 24.210207 38 20 C 38 10.654545 30.345455 3 21 3 z M 21 5 C 29.254545 5 36 11.745455 36 20 C 36 28.254545 29.254545 35 21 35 C 12.745455 35 6 28.254545 6 20 C 6 11.745455 12.745455 5 21 5 z"></path>
+            </svg>
+        </div>
+        <!-- List of students -->
+        <ul class="student-list">
+            <!-- Sample student items -->
+            <!-- Each item contains a student's name and some information -->
+            <!-- These items will be dynamically filtered and paginated -->
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Almond Oil </h3>
+                    <p>
+                        Prunus Amygdalus Dulcis Oil, also called sweet almond oil, is a very popular ingredient in cosmetics and personal care products. It is rich in fatty acids, including oleic acid and linoleic acid, which make it an excellent moisturizer for the skin. It also has vitamin E, which is an antioxidant that helps in protecting the skin from environmental stressors. Prunus Amygdalus Dulcis Oil has a non-greasy and light texture that is very easily absorbed by the skin, making it convenient for all skin types.
+                    </p>
+                </div>
+            </li>
+            <!-- copy this li and write the content inside  -->
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Bakuchiol</h3>
+                    <p>
+                        At first glance, you could think that Bakuchiol is your average plant extract. It is derived from the seeds of Psoralea Corylifolia, aka Babchi, a plant important in Indian and Chinese medicine. The molecule was first isolated in 1973 and several anti-something properties are known about it: it has anti-inflammatory, antioxidant, anti-tumor, anti-bacterial and hepatoprotective magical abilities like plenty of other Ayurvedic plant extracts.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Bamboo Water </h3>
+                    <p>
+                        Bamboo Water is a botanic extract derived from the leaves of the bamboo plant. It is a natural active water that can be used up to 100% in formulations of products for sensitive or irritated skin or as complexion illuminator products. Bamboo Water has a soothing effect on irritations and is regenerative, repairing sensitive skin.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Betaine</h3>
+                    <p>
+                        Betaine is a wonderful ingredient that is present naturally in the human body. It is added to cosmetic and personal care products to replenish the lost moisture content and balance the skin’s natural hydration. Betaine works well with almost all the other ingredients and has zero side effects.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Blackberry Extract</h3>
+                    <p>
+                        Blackberry Fruit Herbasol Extract Glycerine SB is an Aqueous-glycerinic preparation from organic blackberry fruit (Rubus fruticosus L., Rosaceae), preserved with potassium sorbate and sodium benzoate. Blackberry has antioxidant, anti-inflammatory, anti-microbial, soothing, astringent properties and is ideal for use in general skin care, inflamed/ blemish-prone, mature skin, general hair care, bath + shower care, cleansing products/ facial toners and oral care products.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Blueberry Extract</h3>
+                    <p>
+                        Blueberry Fruit Extract is a natural extract of the fruit of Vaccinium Corymbosum. Blueberries contain antioxidants as well as vitamins A and C. Blueberries have been used to help treat acne, revitalize the skin, hasten healing and make the skin have an overall glow. They are an excellent addition to just about any formulation for personal care and cosmetic products and are suitable for use in face/body washes, lotions, hair care, and many other types of applications.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Calendula Extract </h3>
+                    <p>
+                        Calendula Officinalis Extract, derived from the calendula flower, is a botanical ingredient widely used in cosmetics for its soothing and skin-conditioning properties. This extract is a golden to amber-colored liquid, rich in flavonoids, carotenoids, and essential oils, which contribute to its anti-inflammatory and antioxidant effects. In cosmetics, it is added to various products like creams, balms, and serums to soothe and nurture the skin, making it a popular choice for those seeking gentle and natural skincare solutions. Calendula Officinalis Extract, also known as calendula oil, boasts numerous benefits, offering a gentle and nurturing touch to enhance the overall complexion and skin care experience.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Centella Asiatica Extract</h3>
+                    <p>
+                        Centella Asiatica extract is a botanic extract. This extract is commonly used in skin care products due to its moisturizing, wound-healing, and anti-aging properties1. It can also help reduce inflammation on your skin
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Cetearyl Olivate & Sorbitan Olivate </h3>
+                    <p>
+                        Cetearyl Olivate and Sorbitan Olivate are two ingredients that are often used together to form the well-known, natural emulsifier trade named Olivem 1000. Sorbitan Olivate is derived from olive oil and sorbitol, while Cetearyl Olivate is an ester that comes from Cetearyl alcohol and the fatty acids of olive oil. Olivem 1000 is a complex combination of fatty acids that is chemically similar to the lipidic composition of the skin surface. It is a versatile and effective ingredient used in a wide variety of cosmetic and personal care products.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Cetyl Ethylhexaonate</h3>
+                    <p>
+                        Cetyl ethylhexanoate is a clear and odorless liquid that has a non-oily feel. It is a synthetic ester. It is primarily employed as a texture enhancer and emollient for the skin and hair. Cetyl ethylhexanoate's abilities as an emollient enable it to maintain the skin's moisture levels as a bonus benefit to enhancing texture and sensory feel.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Chamomile Extract</h3>
+                    <p>
+                        Chamomile extract is a botanic extract derived from the dried flowers of the chamomile plant (Chamomilla recutita). It is widely used in cosmetics for its soothing and anti-inflammatory properties, making it ideal for sensitive and irritated skin. Chamomile extract contains bioactive compounds like chamazulene and bisabolol, which help reduce redness and calm skin irritations
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Chlorophyll</h3>
+                    <p>
+                        Chlorophyllin, is a copper derivative of a botanically derived color obtained from green plants. This nature-based dye imparts a clear water-based solution. It is suggested for use in make-up, skincare, sun care and toiletries products. Chlorophyllin is another name for a group of closely related water-soluble salts that are semi-synthetic derivatives of chlorophyll that differ in the identity of the cations associated with the anion. Chlorophyllin-Copper Complex is made from chlorophyll.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Coconut Ester</h3>
+                    <p>
+                        Employs the emollient, lubricant and protective properties of the coconut oil (Cocos nucifera, Arecaceae) in a water-soluble form. It has a mild surfactant power that exerts a gentle solubilizing and cleansing action.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Copper Tripeptides</h3>
+                    <p>
+                        Copper Tripeptide is a cosmetic ingredient that is used in a variety of skincare products. It is a blue crystal powder that is produced using patented crystallization technology. It is known for its anti-aging, firming, and anti-wrinkle properties. It is typically used in eye creams, facial moisturizers, sunscreens, and body lotions.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Cucumber Extract </h3>
+                    <p>
+                        Cucumber extract is a botanic extract that is commonly used in skin care products due to its moisturizing and skin conditioning properties. It is also known to have anti-inflammatory and antioxidant effects. Cucumber extract is a popular ingredient in many skin care products, including toners, serums, and creams.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Decyl Glucoside</h3>
+                    <p>
+                        I believe you are asking about Decyl Glucoside, which is a non-ionic surfactant used as a foaming, cleansing, conditioning, or emulsifying agent in cosmetics. It is often used as a co-surfactant with Coco Betaine and Coco Glucoside. Decyl Glucoside is derived from plant-derived substances made from fats, sugars, and alcohols commonly found in corn sugars, coconuts, and palm oils. It has excellent foaming capacity and good dermatological compatibility. It is considered ideal for sensitive skin types
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Diheptanoate</h3>
+                    <p>
+                        A clear, odorless, very light emollient ester that helps to achieve light textures. It has great spreadability, a good slip, and a silky skin feel.  It's ideal to solubilize sunscreen agents and fragrances. It's also touted as a volatile (evaporates from the skin rather than absorbs into it) silicone alternative, especially to replace Cyclomethicone mixes.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Ethylhexyl Triazone</h3>
+                    <p>
+                        Ethylhexyl Triazone is a mineral used in cosmetics as a white dye (CI 77947) or as a UV filter. It provides broad-spectrum protection against UVA and UVB radiation, making it an excellent choice for sunscreens. Ethylhexyl Methoxycinnamate also has anti-inflammatory and antimicrobial properties, making it an excellent ingredient for treating and preventing acne and other skin conditions. It is a natural alternative to synthetic sunscreens and provides numerous benefits for the skin.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Ethylhexyl glycerin</h3>
+                    <p>
+                        Ethylhexyl glycerin is a synthetic preservative that is commonly used in cosmetics and personal care products. It is known for its antibacterial properties and is used to prevent the growth of bacteria and fungi in products. It is also used as a stabilizer and is found in many products ranging from perfumes to shampoos.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Gingseng Extract</h3>
+                    <p>
+                        Panax Ginseng Root Extract is a botanical extract derived from the roots of the Panax ginseng plant, a traditional medicinal herb. It is widely used in cosmetics for its potential skincare benefits. The extract typically appears as a brownish-yellow liquid or powder, depending on the formulation. Panax Ginseng Root Extract contains various bioactive compounds, such as ginsenosides, polysaccharides, and antioxidants, which are believed to have revitalizing and anti-aging properties. This ingredient is incorporated into skincare products like creams, serums, and masks, aiming to improve skin texture, promote collagen production, and provide antioxidant protection against environmental stressors.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Green Tea Extract</h3>
+                    <p>
+                        Green Tea Extract is derived from the leaves of Camellia sinensis. It contains anti-oxidant ingredients, mainly green tea catechins. Green tea and its derivatives are sometimes used as dietary supplements and in alternative medicine. It is also good for eliminating free radicals, anti-aging, anti-bacterium, and radio resistance.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Hyaluronic Acid</h3>
+                    <p>
+                        Hyaluronic Acid is a naturally occurring molecule found in the human body, primarily in connective tissue, skin, and eyes. It is the main component that gives the skin a plump, youthful, and hydrated look. As an ingredient, it is used as a humectant, which means it draws and retains moisture on the surface of the skin. Hyaluronic acid is a clear, viscous liquid that is typically added to skincare formulations in small amounts. It is often combined with other hydrating ingredients in skincare products, such as glycerin and ceramides, to provide an external boost of hydration to the skin.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Isoamyl Laurate</h3>
+                    <p>
+                        Isoamyl Laurate is a non-oily, silky, non-greasy emollient that can be used in a variety of skincare, color cosmetic, and hair care applications. It is a naturally occurring, oily liquid that is colorless to yellowish and has received Ecocert approval. It is typically made from coconut or beetroot and is regarded as a natural silicone substitute
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Isopropyl Myristate</h3>
+                    <p>
+                        Isopropyl Myristate is a cosmetic ingredient that is commonly used as an emollient, texture enhancer, and solvent in personal care products. It is the ester of isopropyl alcohol and myristic acid, and has an oily base with low viscosity that adapts well to the skin.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Kiwi Extract </h3>
+                    <p>
+                        Original Extract Kiwi is part of the Original Extracts line, which are active waters derived from fresh fruits. Retaining trace elements from the fresh plant, these living waters bring moisturizing, hydrating, and nourishing properties. Original Extract Kiwi has moisturizing and skin brightening properties. Certified natural by ECOCERT/COSMOS and NPA. Preservative free.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Lecithin</h3>
+                    <p>
+                        Lecithin is a natural ingredient that can be derived from many foods such as eggs, sunflower seeds, and, most commonly, soy. It is a complex combination of diglycerides of fatty acids linked to the choline ester of phosphoric acid. Lecithin is a magical ingredient that helps improve the texture of both the products as well as the surface that it is applied to. It is basically an emollient that also acts as a penetration enhancer - allowing the products to perform better. In its raw form, Lecithin appears as a yellow-brownish substance that can be in the shape of thick granules, fine powder, or flowy liquid. Further, this ingredient is gluten-free and contains vitamin E which is beneficial for treating damaged skin and hair.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Licorice Extract</h3>
+                    <p>
+                        Glycyrrhiza Glabra Root Extract, also known as Licorice Root Extract, is a natural ingredient derived from the root of the Glycyrrhiza Glabra plant. In cosmetics, this botanical extract is prized for its skin-soothing and anti-inflammatory properties. Glycyrrhiza Glabra Root Extract contains active compounds like glycyrrhizic acid and flavonoids, which help reduce redness, irritation, and inflammation, making it suitable for sensitive and problematic skin. Its appearance is typically a pale yellow to brownish liquid, and it is often used in various skincare products, such as serums, creams, and toners, to promote a calm and rejuvenated complexion.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Methylene Bis-Benzotriazolyl Tetramethylbutylphenol</h3>
+                    <p>
+                        It is a mineral used in cosmetics as a white dye (CI 77947) or as a UV filter. It provides broad-spectrum protection against UVA and UVB radiation, making it an excellent choice for sunscreens. Methylene Bis-Benzotriazolyl Tetramethylbutylphenol also has anti-inflammatory and antimicrobial properties, making it an excellent ingredient for treating and preventing acne and other skin conditions. It is a natural alternative to synthetic sunscreens and provides numerous benefits for the skin.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Moringa Extract</h3>
+                    <p>
+                        Moringa Oleifera Seed Oil, derived from the seeds of the Moringa Oleifera tree, is a prized ingredient in cosmetics and skincare. Its chemical formula primarily consists of triglycerides and fatty acids. This lightweight, pale yellow to greenish oil is rich in antioxidants, vitamins, and essential fatty acids, making it a potent natural moisturizer and emollient. Moringa Seed Oil's nourishing properties make it a sought-after component in cosmetics, known for its ability to hydrate, rejuvenate, and protect the skin. It is often found in creams, lotions, serums, and hair care products.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Mulberry Extract</h3>
+                    <p>
+                        Morus Alba Root Extract has potential skin care benefits and is widely used in the personal care industry. This extract is rich in antioxidants, vitamins, and minerals, offering properties that help brighten and even out the complexion. Morus Alba Root Extract is often utilized in skincare formulations targeting hyperpigmentation, age spots, and dull skin.
+                    </p>
+                </div>
+            </li>
+
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Niacinamide</h3>
+                    <p>
+                        Niacinamide is a form of vitamin B-3 that is widely used in cosmetics and skincare products. It is known for its ability to protect the skin from environmental damage and build proteins for healthier skin. Niacinamide is a brilliant source to protect and treat the hair and skin; therefore, beauty products are incomplete without this exquisite ingredient.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Oat Beta Glucan</h3>
+                    <p>
+                        Beta-Glucan is a natural, soluble polysaccharide found in the cell walls of oats, yeast, and some mushrooms. It has a chemical formula of C18H32O16 and appears as a white to off-white powder. In cosmetics and personal care products, Beta-Glucan is used as a moisturizer and skin-soothing agent. It helps to reduce the appearance of fine lines and wrinkles, improves skin texture, and enhances skin elasticity. Products containing Beta-Glucan include facial creams, lotions, and serums. Its natural origin and multiple benefits make it a popular ingredient in natural and organic cosmetic products.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Phenoxyethanol</h3>
+                    <p>
+                        Phenoxyethanol is a synthetic preservative that is commonly used in cosmetics and personal care products. It is known for its antibacterial properties and is used to prevent the growth of bacteria and fungi in products. It is also used as a stabilizer and is found in many products ranging from perfumes to shampoos.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Phenoxyethanol Ethylhexylglycerin</h3>
+                    <p>
+                        Phenoxyethanol is a sticky and oily substance that is generally used in cosmetic and skincare products as a preservative. This substance is known as glycol ether in chemical terms and is also a solvent that stabilizes various ingredients because it does not react with light or air. 
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Phospholipids</h3>
+                    <p>
+                        A type of lipid that's the major (about 75%) component of all cell membranes. As for skincare, it works as an emollient and skin-identical ingredients. It has a water-loving head with two water-hating tails and this structure gives the molecule emulsifying properties. It is also often used to create liposomes, small spheres surrounded by phospholipid bi-layer designed to carry some active ingredient and help its absorption.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Phytosqualene</h3>
+                    <p>
+                        Phytosqualane is a natural emollient that is used in a variety of skincare products. It is a colorless, odorless, and non-greasy oil that is derived from plant sources such as olives. It is known for its moisturizing and skin-replenishing properties, and is often used in anti-aging products
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Pomegranate Extract </h3>
+                    <p>
+                        Punica Granatum Extract, commonly known as pomegranate extract, is a natural ingredient widely used in cosmetics for its numerous benefits. This extract is derived from the fruit of the Punica granatum tree and is rich in antioxidants like polyphenols and anthocyanins. This extract boasts a vibrant, reddish hue and is packed with skincare advantages. It helps combat free radicals, promoting youthful skin by reducing the signs of aging. Furthermore, it possesses anti-inflammatory properties, aiding in calming irritated skin.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Prickly Pear Extract </h3>
+                    <p>
+                        Organic Prickly Pear Oil is a yellowish to greenish liquid vegetable oil obtained by cold pressing from the organic seeds of “Opuntia Ficus Indica”. The remarkable composition of this product gives it a powerful anti-oxidative activity, a high moisturizing value, and real cell rejuvenating ability. Because of these benefits, this product is used in premium anti-aging range, very dry skin care products (for hands or for foot), dry hair care, and after sun cosmetic applications.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Propylene Glycol</h3>
+                    <p>
+                        Propylene Glycol is a synthetic alcohol that is widely used in cosmetics and skincare products as a humectant, solvent, emollient, and preservative. It is a colorless, viscous liquid that is nearly odorless and has a faintly sweet taste. Propylene Glycol is derived from either natural gas, petroleum, or vegetable sources. It has the ability to absorb water and bring it to the outermost layer of the skin, thus enhancing the appearance of the skin by restoring suppleness and reducing flakiness. Products with Propylene Glycol have very low volatility and do not irritate the skin.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Raspberry Extract </h3>
+                    <p>
+                        Raspberry is one of the colorful berries that’s not only delicious but contains many biologically active, healthy compounds. It has polyphenols including anthocyanins and ellagitannins that have antioxidant and anti-inflammatory properties. 
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Reishi Mushroom Extract</h3>
+                    <p>
+                        Reishi Extract is a natural extract of the mushroom Ganoderma Lucidum. Reishi mushroom have anti-cancer and anti-viral effects. Reishi mushrooms are an excellent addition in skin care and body care formulations. They can be used in anti-aging and anti-inflammatory, bath and body care formulations for dry or damaged skin to help reduce flaking and restore suppleness.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Sodium Acrylate Copolymer</h3>
+                    <p>
+                        Sodium Acrylate Copolymer is a synthetic polymer consisting of acrylic acid, methacrylic acid, or one of their simple esters. It is used in cosmetics and personal care products as a binder, film-forming agent, and viscosity-increasing agent. Sodium Acrylate Copolymer is a salt-derived polymer that is used to stabilize, suspend, and bind essential ingredients in skin care products.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Sphingolipids</h3>
+                    <p>
+                        Ceramide Complex CLR™ PE-F supplies skin with structural elements and supports the recovery and maintenance of the skin’s healthy barrier function and water-holding capacity. It contains phyto lipids in lamellar, liquid crystalline form. The plant- derived lipid mixture consists of phospholipids and sphingolipids. It is easily able to penetrate skin and also moisturizes hair.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Spondias Mombin Pulp Extract and Mangifera Indica (Mango) Pulp Extract and Musa Sapientum (Banana) Pulp Extract </h3>
+                    <p>
+                        Exfo-Bio is a fruit extract containing carbohydrates and alpha-hydroxy acids that stimulates gentle biological exfoliation through the intelligent cell renewal. It also stimulates the production of extracellular matrix and acts as a wrinkles and fine lines filler.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Strawberry Extract </h3>
+                    <p>
+                        Fragaria Chiloensis Fruit Extract. Strawberry Extract by Morechem acts as an antioxidant. It contains anti-oxidants like anthocyanin and ellagitannin are contained in strawberry, effective in protecting our fibroblasts from UV-damage. Strawberry Extract finds application in formulating cosmetic products.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Tapioca Starch</h3>
+                    <p>
+                        Tapioca Starch is a natural ingredient that is commonly used in the cosmetic and personal care industry as a thickener, binder, and stabilizer. It is derived from the cassava root, which is first peeled and grated. The grated cassava is then rinsed and strained to remove the fibers and other impurities. The resulting pulp is then ground into a fine powder, which is then washed and dried to create tapioca starch.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Turmeric Extract </h3>
+                    <p>
+                        Curcuma Longa Root Extract, commonly known as Turmeric Root Extract, is derived from the roots of the Curcuma longa plant. It is a botanical extract widely used in cosmetics for its various beneficial properties. In cosmetic products, it often appears as a yellow-orange powder or liquid. Curcuma Longa Root Extract is widely known for its antioxidant, anti-inflammatory, and skin-brightening properties, making it a popular ingredient in skincare formulations targeting radiance, even complexion, and overall skin health.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Vitamin E </h3>
+                    <p>
+                        Tocopherol is an active form of vitamin E that is truly a magical ingredient in skin care and cosmetics. It is a pale yellow liquid that conditions the skin and hair deeply and also acts as an antioxidant. Tocopherol further protects the skin from harmful ultraviolet rays of the sun. This ingredient is added to a wide variety of products such as sunscreens and moisturizers, makeup products, hair styling products, etc. Tocopherol is also a preservative preventing the products from going bad.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Watermelon Extract </h3>
+                    <p>
+                        Watermelon Extract is a highly purified watermelon extract (citrullus lanatus). Watermelon plants produce solutes that protect the cells against drought, heat & UV-rays by a DNA-protecting mechanism. Improves the appearance of aged and stressed skin. Gives the look of a younger, regenerated skin. Reduce appearance of skin redness after UV irradiation.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Willow Bark Extract</h3>
+                    <p>
+                        Salix Alba Bark Extract, derived from the bark of the white willow tree (Salix alba), is a botanical ingredient widely used in cosmetics. Renowned for its natural salicylates, including salicin, it exhibits anti-inflammatory and exfoliating properties. In skincare formulations, Salix Alba Bark Extract contributes to gentle exfoliation, promoting cell turnover and aiding in acne treatment. Its appearance varies, but it is often a brownish liquid or powder. 
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Xanthan Gum</h3>
+                    <p>
+                        Xanthan Gum is a natural product that is non-toxic and non-irritating. It is an anionic, high molecular weight polysaccharide that is used as a stabilizer and viscosity modifier in aqueous-based systems. Xanthan Gum is produced by the fermentation of glucose and sucrose by the bacterium, Xanthomonas campestris. It is used in cosmetics as an emulsion stabilizer, film-forming agent, or binder.
+                    </p>
+                </div>
+            </li>
+            <li class="student-item cf">
+                <div class="student-details">
+                    <h3>Zinc Oxide </h3>
+                    <p>
+                        Zinc Oxide is a mineral used in cosmetics as a white dye (CI 77947) or as a UV filter. It provides broad-spectrum protection against UVA and UVB radiation, making it an excellent choice for sunscreens. Zinc Oxide also has anti-inflammatory and antimicrobial properties, making it an excellent ingredient for treating and preventing acne and other skin conditions. It is a natural alternative to synthetic sunscreens and provides numerous benefits for the skin.
+                    </p>
+                </div>
+            </li>
+            <!-- Add more student items as needed -->
+        </ul>
+        <!-- Pagination section -->
+        <div class="pagination">
+            <ul class="pagination__list"></ul>
+        </div>
+    </div>
+
+    <!-- JavaScript script for dynamic filtering and pagination -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const studentItems = document.querySelectorAll('.student-item');
+            const paginationList = document.querySelector('.pagination__list');
+            const alphabetButtonsContainer = document.querySelector('.alphabet-buttons');
+            const searchInput = document.getElementById('searchInput');
+            const itemTotal = 10;
+            let currentItems = Array.from(studentItems);
+    
+            function hideAll() {
+                studentItems.forEach(item => item.style.display = 'none');
+            }
+    
+            function displayRange(items) {
+                hideAll();
+                items.forEach(item => item.style.display = 'block');
+            }
+    
+            function updatePagination() {
+                const pageCount = Math.ceil(currentItems.length / itemTotal);
+                let paginationHTML = '';
+                for (let i = 0; i < pageCount; i++) {
+                    paginationHTML += `<li><span class="pagination__num">${i + 1}</span></li>`;
+                }
+                paginationList.innerHTML = paginationHTML;
+            }
+    
+            displayRange(currentItems.slice(0, itemTotal));
+            updatePagination();
+    
+            function createAlphabetButtons() {
+                const uniqueLetters = new Set();
+                studentItems.forEach(item => {
+                    const name = item.querySelector('.student-details h3').textContent.trim();
+                    const firstLetter = name.charAt(0).toUpperCase();
+                    uniqueLetters.add(firstLetter);
+                });
+    
+                const unfilterButton = document.createElement('button');
+                unfilterButton.textContent = 'All';
+                unfilterButton.className = 'filter-btn';
+                unfilterButton.onclick = function () {
+                    currentItems = Array.from(studentItems);
+                    displayRange(currentItems.slice(0, itemTotal));
+                    updatePagination();
+                };
+                alphabetButtonsContainer.appendChild(unfilterButton);
+    
+                Array.from(uniqueLetters).sort().forEach(letter => {
+                    const button = document.createElement('button');
+                    button.textContent = letter;
+                    button.className = 'filter-btn';
+                    button.onclick = function () {
+                        currentItems = Array.from(studentItems).filter(item => {
+                            const name = item.querySelector('.student-details h3').textContent.trim();
+                            const firstLetter = name.charAt(0).toUpperCase();
+                            return firstLetter === letter;
+                        });
+                        displayRange(currentItems.slice(0, itemTotal));
+                        updatePagination();
+                    };
+                    alphabetButtonsContainer.appendChild(button);
+                });
+            }
+    
+            createAlphabetButtons();
+    
+            searchInput.addEventListener('input', function () {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                currentItems = Array.from(studentItems).filter(item => {
+                    const name = item.querySelector('.student-details h3').textContent.trim().toLowerCase();
+                    return name.includes(searchTerm);
+                });
+                displayRange(currentItems.slice(0, itemTotal));
+                updatePagination();
+            });
+    
+            document.body.addEventListener('click', function (event) {
+                const target = event.target;
+                if (target.classList.contains('pagination__num')) {
+                    const page = parseInt(target.innerText, 10);
+                    const startFrom = (page - 1) * itemTotal;
+                    const end = startFrom + itemTotal;
+                    displayRange(currentItems.slice(startFrom, end));
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
